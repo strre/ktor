@@ -255,7 +255,7 @@ abstract class HostTestSuite<H : ApplicationHost> : HostTestBase<H>() {
         println("test file is $file")
 
         createAndStartServer() {
-            application.install(CompressionSupport)
+            application.install(Compression)
             handle {
                 call.respond(LocalFileContent(file))
             }
@@ -296,7 +296,7 @@ abstract class HostTestSuite<H : ApplicationHost> : HostTestBase<H>() {
         println("test file is $file")
 
         createAndStartServer() {
-            application.install(CompressionSupport)
+            application.install(Compression)
             application.install(PartialContentSupport)
 
             handle {
