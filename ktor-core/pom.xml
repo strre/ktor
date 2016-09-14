@@ -31,11 +31,6 @@
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <!--<goal>test-jar</goal>-->
-                        </goals>
-                    </execution>
-                    <execution>
-                        <goals>
                             <goal>test-jar</goal>
                         </goals>
                     </execution>
