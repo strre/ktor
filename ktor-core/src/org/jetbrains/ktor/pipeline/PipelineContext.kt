@@ -1,15 +1,15 @@
 package org.jetbrains.ktor.pipeline
 
 interface PipelineContext<out TSubject : Any> {
-
     val subject: TSubject
+    val exception : Throwable?
 
-    fun onSuccess(body: () -> Unit)
-    fun onFail(body: (Throwable) -> Unit)
+    fun onSuccess(body: PipelineContext<TSubject>.(Any) -> Unit)
+    fun onFail(body: PipelineContext<TSubject>.(Any) -> Unit)
 
-    fun onFinish(body: () -> Unit) {
+    fun onFinish(body: PipelineContext<TSubject>.(Any) -> Unit) {
         onSuccess(body)
-        onFail { body() }
+        onFail(body)
     }
 
     fun pause(): Nothing

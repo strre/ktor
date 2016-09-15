@@ -38,8 +38,9 @@ object TransformationSupport : ApplicationFeature<ApplicationCallPipeline, Appli
             onSuccess {
                 this@transform.continuePipeline()
             }
-            onFail { cause ->
-                this@transform.runBlock { fail(cause) }
+            onFail {
+                val propagateException = exception!!
+                this@transform.runBlock { fail(propagateException) }
             }
 
             transformStage(machine, state)
@@ -54,7 +55,7 @@ object TransformationSupport : ApplicationFeature<ApplicationCallPipeline, Appli
             return
         }
 
-        machine.appendDelayed(subject, listOf({ p ->
+        machine.pushExecution(subject, listOf({ p ->
             @Suppress("NON_TAIL_RECURSIVE_CALL")
             transformStage(machine, state)
         }))
