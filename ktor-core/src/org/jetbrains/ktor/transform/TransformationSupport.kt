@@ -36,7 +36,7 @@ object TransformationSupport : ApplicationFeature<ApplicationCallPipeline, Appli
         subject.attributes.put(TransformationState.Key, state)
         pipeline.intercept(phase) {
             onSuccess {
-                this@transform.continuePipeline()
+                this@transform.proceed()
             }
             onFail {
                 val propagateException = exception!!
